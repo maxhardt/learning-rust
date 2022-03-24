@@ -12,10 +12,8 @@ pub fn is_prime(x: i64) -> bool {
         return false;
     } else {
         let sqrt_x_upper = (x as f64).sqrt() as i64 + 1;
-        let mut remainder: i64;
         for number in 2..sqrt_x_upper {
-            remainder = x % number;
-            if remainder == 0 {
+            if x % number == 0 {
                 return false;
             }
         }

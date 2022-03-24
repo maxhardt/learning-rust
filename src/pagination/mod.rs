@@ -20,7 +20,7 @@ pub fn amount_of_pages(summary: u32) -> u32 {
 
         }
     }
-    return 0;
+    unreachable!()
 }
 
 // helper functions
