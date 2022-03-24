@@ -32,19 +32,10 @@ jobs:
           target
         key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('Cargo.lock') }}
 
-    - name: check env and path variables
-      run: |
-        echo $PATH;
-        echo $GITHUB_PATH;
-        echo "$HOME/.cargo/bin" >> $GITHUB_PATH;
-        echo $PATH;
-        echo $GITHUB_PATH;
-
     - name: Run tests and generate reports
       run: |
         cargo install cargo2junit grcov;
-        echo "$HOME/.cargo/bin" >> $GITHUB_PATH;
-        cargo test -- -Z unstable-options --format json | cargo2junit > results.xml;
+        cargo test -- -Z unstable-options --format json | $HOME/.cargo/bin/cargo2junit > results.xml;
 
     - name: Upload test results
       uses: EnricoMi/publish-unit-test-result-action@v1
