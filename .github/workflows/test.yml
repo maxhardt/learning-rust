@@ -32,6 +32,14 @@ jobs:
           target
         key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('Cargo.lock') }}
 
+    - name: check env and path variables
+      run: |
+        echo $PATH;
+        echo $GITHUB_PATH;
+        echo "$HOME/.cargo/bin" >> $GITHUB_PATH;
+        echo $PATH;
+        echo $GITHUB_PATH;
+
     - name: Run tests and generate reports
       run: |
         cargo install cargo2junit grcov;
