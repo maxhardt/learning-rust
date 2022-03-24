@@ -37,10 +37,9 @@ jobs:
         cargo install cargo2junit grcov;
         cargo test -- -Z unstable-options --format json | $HOME/.cargo/bin/cargo2junit > results.xml;
 
-    - name: Publish reports
-      uses: dorny/test-reporter@v1
-      if: success() || failure()
+    - name: Upload test results
+      if: ${{ runner.os != "macOS" }}
+      uses: EnricoMi/publish-unit-test-result-action@v1
       with:
-        name: JEST Tests
-        path: results.xml
-        reporter: jest-junit
+        check_name: Test Results
+        files: results.xml
