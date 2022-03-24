@@ -38,7 +38,7 @@ jobs:
         cargo test -- -Z unstable-options --format json | $HOME/.cargo/bin/cargo2junit > results.xml;
 
     - name: Upload test results
-      if: ${{ runner.os != "macOS" }}
+      if: ${{ runner.os != 'macOS' }}
       uses: EnricoMi/publish-unit-test-result-action@v1
       with:
         check_name: Test Results
