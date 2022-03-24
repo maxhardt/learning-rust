@@ -12,7 +12,7 @@ env:
 jobs:
   build-and-test:
 
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
 
     steps:
 
@@ -35,7 +35,7 @@ jobs:
     - name: Run tests and generate reports
       run: |
         cargo install cargo2junit grcov;
-        cargo test -- -Z unstable-options --format json | $HOME/.cargo/bin/cargo2junit > results.xml;
+        cargo test -- -Z unstable-options --format json | cargo2junit > results.xml;
 
     - name: Upload test results
       if: ${{ runner.os != 'macOS' }}
