@@ -1,4 +1,4 @@
-name: Rust
+name: Build-and-Test
 
 on:
   push:
@@ -34,7 +34,7 @@ jobs:
 
     - name: Run tests and generate reports
       run: |
-        cargo install cargo2junit grcov;
+        cargo install cargo2junit;
         cargo test -- -Z unstable-options --format json | cargo2junit > results.xml;
 
     - name: Upload test results

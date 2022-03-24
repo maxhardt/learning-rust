@@ -1,6 +1,6 @@
 # Learning Rust by solving Katas
 
-[![Rust](https://github.com/maxhardt/learning-rust/actions/workflows/test.yml/badge.svg?branch=master)](https://github.com/maxhardt/learning-rust/actions/workflows/test.yml)
+[![Build-and-Test](https://github.com/maxhardt/learning-rust/actions/workflows/test.yml/badge.svg?branch=master)](https://github.com/maxhardt/learning-rust/actions/workflows/test.yml)
 
 This project documents my learning progress by solving Katas in Rust from codewars.com.
 
