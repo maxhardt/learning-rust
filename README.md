@@ -1,5 +1,7 @@
 # Learning Rust by solving Katas
 
+[![Rust](https://github.com/maxhardt/learning-rust/actions/workflows/test.yml/badge.svg?branch=master)](https://github.com/maxhardt/learning-rust/actions/workflows/test.yml)
+
 This project documents my learning progress by solving Katas in Rust from codewars.com.
 
 - What are Katas? Visit https://codewars.com
@@ -30,12 +32,16 @@ Tests are organized separately into [Unit Tests](https://doc.rust-lang.org/book/
 
 Clone this repo and [install Rust](https://doc.rust-lang.org/book/ch01-01-installation.html).
 
-## How to run?
+## How to run tests?
 
-Running both Unit and Integration tests:
+Tests are automatically on any push to master as defined in the GitHub actions [test pipeline](./.github/workflows/test.yml).
+
+## How to run tests manually?
+
+For manually running both Unit and Integration tests:
 
 ```
-$ cargo test
+$ cargo test --tests
 
     Finished test [unoptimized + debuginfo] target(s) in 0.04s
      Running unittests (target/debug/deps/katas-d810538bc76d3a2d)
