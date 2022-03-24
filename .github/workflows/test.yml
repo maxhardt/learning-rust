@@ -35,6 +35,7 @@ jobs:
     - name: Run tests and generate reports
       run: |
         cargo install cargo2junit grcov;
+        echo "$HOME/.cargo/bin" >> $GITHUB_PATH;
         cargo test -- -Z unstable-options --format json | cargo2junit > results.xml;
 
     - name: Upload test results
