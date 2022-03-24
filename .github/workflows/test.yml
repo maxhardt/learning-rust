@@ -1,19 +1,44 @@
-name: Learning-rust-pipeline
-on: [push]
+name: Rust
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+env:
+  CARGO_TERM_COLOR: always
+
 jobs:
   build-and-test:
+
     runs-on: self-hosted
+
     steps:
-      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
-      - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
-      - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
 
-      - name: Check out repository code
-        uses: actions/checkout@v2
-      - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
-      - run: echo "🖥️ The workflow is now ready to test your code on the runner."
+    - uses: actions/checkout@v2
 
-      - name: Build and test
-        run: cargo test --tests
+    - name: Cache dependencies
+      uses: actions/cache@v2
+      env:
+        cache-name: cache-dependencies
+      with:
+        path: |
+          ~/.cargo/.crates.toml
+          ~/.cargo/.crates2.json
+          ~/.cargo/bin
+          ~/.cargo/registry/index
+          ~/.cargo/registry/cache
+          target
+        key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('Cargo.lock') }}
 
-      - run: echo "🍏 This job's status is ${{ job.status }}."
+    - name: Run tests and generate reports
+      run: |
+        cargo install cargo2junit grcov;
+        cargo test -- -Z unstable-options --format json | cargo2junit > results.xml;
+
+    - name: Upload test results
+      uses: EnricoMi/publish-unit-test-result-action@v1
+      with:
+        check_name: Test Results
+        files: results.xml
